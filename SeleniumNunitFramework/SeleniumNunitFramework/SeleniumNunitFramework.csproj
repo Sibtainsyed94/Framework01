@@ -118,7 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest\BaseClass.cs" />
-    <Compile Include="ExcelLib.cs" />
+    <Compile Include="Excel File Reader\ExcelLib.cs" />
     <Compile Include="ExtentReport.cs" />
     <Compile Include="TestScripts\AddressBook.cs" />
     <Compile Include="PageObjects\Checkout Objects\AddToCart.cs" />
@@ -127,11 +127,8 @@
     <Compile Include="PageObjects\Checkout Objects\MyAccount.cs" />
     <Compile Include="PageObjects\Checkout Objects\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ParallelTesting.cs" />
-    <Compile Include="Screenshot.cs" />
     <Compile Include="PageObjects\Address Objects\AddNewAddress.cs" />
     <Compile Include="TestScripts\CheckoutScenario.cs" />
-    <Compile Include="Utilities\BrowserUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using SeleniumNunitFramework.BaseTest;
 using SeleniumNunitFramework.TestScripts;
 using System;
@@ -16,26 +17,63 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
     public class AddressBook : BaseClass
 
     {
-
+      //Screencapture obj =  new Screencapture();
+        
         [Test, Order(1), Category("AddressScenario")]
         public void Login()
         {
-            //var LOGIN1 = new Login1(driver);
-            //   LOGIN1.NavigateToAddress();
+            try
+            {
+                //var LOGIN1 = new Login1(driver);
+                //   LOGIN1.NavigateToAddress();
 
-          var LOGIN  = new Login(driver);
-            LOGIN.NavigateToAddress();
+                var LOGIN = new Login(driver);
+                LOGIN.NavigateToAddress();
+                //h2[contains(text(),'Add Address')]
+                string title = driver.Title;
+                
+                Assert.AreEqual("My Account",title);
+
+              
+
+            }
+
+            catch (Exception e)
+            {
+                //obj.Capture();
+                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Login.jpeg", ScreenshotImageFormat.Jpeg);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
+
+            
         }
 
         [Test, Order(2), Category("AddressScenario")]
         public void Addressenter()
         {
+            try
+            {
+                driver.Navigate().GoToUrl("https://demo.opencart.com/index.php?route=account/address/add");
 
-            driver.Navigate().GoToUrl("https://demo.opencart.com/index.php?route=account/address/add");
+                var address = new AddNewAddress(driver);
 
-            var address = new AddNewAddress(driver);
-          
-            address.AddressFields();
+                address.AddressFields();
+                string actualsucessmessage = address.Suceess();
+                string expected = "Your address has been successfully added";
+                Assert.IsTrue(actualsucessmessage.Equals(expected));
+
+
+
+            }
+
+            catch (Exception e)
+            {
+
+                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Address01.jpeg", ScreenshotImageFormat.Jpeg);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
 
         }
 

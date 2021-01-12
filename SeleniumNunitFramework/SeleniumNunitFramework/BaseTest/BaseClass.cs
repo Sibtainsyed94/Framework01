@@ -8,18 +8,25 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Configuration;
 using OpenQA.Selenium.Firefox;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 
 namespace SeleniumNunitFramework.BaseTest
 {
+    [TestFixture]
     public class BaseClass
     {
-
+        //public ExtentReports extent = null;
         public IWebDriver driver;
 
         [OneTimeSetUp]
 
         public void open()
         {
+            //extent = new ExtentReports();
+            //var htmlReporter = new ExtentHtmlReporter(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\ExtentReports\Extent.html");
+            //extent.AttachReporter(htmlReporter);
+
             string execbrowser = ConfigurationManager.AppSettings["executionbrowser"].ToString();
             string url = ConfigurationManager.AppSettings["URL"].ToString();
 
@@ -46,9 +53,10 @@ namespace SeleniumNunitFramework.BaseTest
         [OneTimeTearDown]
      public void close()
      {
+            //extent.Flush();
             //driver.Quit();
 
-     }
+        }
 
     }
 }

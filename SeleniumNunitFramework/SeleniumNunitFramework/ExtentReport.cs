@@ -22,7 +22,7 @@ namespace SeleniumNunitFramework
         {
 
             extent = new ExtentReports();
-            var htmlReporter = new ExtentHtmlReporter(@"C:\Users\SIBTAIN\Desktop\SeleniumNunitFramework\SeleniumNunitFramework\ExtentReports");
+            var htmlReporter = new ExtentHtmlReporter(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\ExtentReports\Extent.html");
             extent.AttachReporter(htmlReporter);
 
         }
