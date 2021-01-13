@@ -120,6 +120,7 @@
     <Compile Include="BaseTest\BaseClass.cs" />
     <Compile Include="ExcelLib.cs" />
     <Compile Include="ExtentReport.cs" />
+    <Compile Include="Helpers\Mailer.cs" />
     <Compile Include="TestScripts\AddressBook.cs" />
     <Compile Include="PageObjects\Checkout Objects\AddToCart.cs" />
     <Compile Include="PageObjects\Checkout Objects\Checkout.cs" />
