@@ -46,10 +46,19 @@ namespace SeleniumNunitFramework.TestScripts
         [FindsBy(How = How.XPath, Using = "//body/div[@id='account-address']/div[1]/div[1]/form[1]/div[1]/div[2]/input[1]")]
         public IWebElement submit { get; set; }
 
+        [FindsBy(How = How.CssSelector, Using = "div.alert.alert-success.alert-dismissible")]
+        public IWebElement sucessmessage { get; set; }
+
+        //div.alert.alert-success.alert-dismissible
+        public  string Suceess()
+        {
+             return sucessmessage.Text;
+        }
+
 
         public void AddressFields()
         {
-            ExcelLib.PopulateInCollection(@"C:\Users\SIBTAIN\Desktop\SeleniumNunitFramework\SeleniumNunitFramework\AddressDetails.xlsx");
+            ExcelLib.PopulateInCollection(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\AddressDetails.xlsx");
             firstname.SendKeys(ExcelLib.ReadData(1, "Firstname"));
             lastname.SendKeys(ExcelLib.ReadData(1, "Lastname"));
             address1.SendKeys(ExcelLib.ReadData(1, "Address1"));
