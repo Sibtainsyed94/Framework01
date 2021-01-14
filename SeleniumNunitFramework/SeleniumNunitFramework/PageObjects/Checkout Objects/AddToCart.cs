@@ -27,10 +27,11 @@ namespace SeleniumNunitFramework.PageObjects
         public IWebElement checkoutclick { get; set; }
 
 
-        public void NavigatoToCheckout()
+        public Checkout NavigateToCheckout()
         {
             AddinCart.Click();
             checkoutclick.Click();
+            return new Checkout(driver);
         }
 
     }

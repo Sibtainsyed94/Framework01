@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumNunitFramework.BaseTest;
+using SeleniumNunitFramework.Helpers;
 using SeleniumNunitFramework.TestScripts;
 using System;
 using System.Collections.Generic;
@@ -14,11 +16,13 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
 
     [TestFixture]
     [Parallelizable]
+
     public class AddressBook : BaseClass
 
     {
-      //Screencapture obj =  new Screencapture();
-        
+        public ExtentTest test = null;
+        //Screencapture obj =  new Screencapture();
+
         [Test, Order(1), Category("AddressScenario")]
         public void Login()
         {
@@ -26,7 +30,7 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
             {
                 //var LOGIN1 = new Login1(driver);
                 //   LOGIN1.NavigateToAddress();
-
+                test = extent.CreateTest("Login").Info("Login Test");
                 var LOGIN = new Login(driver);
                 LOGIN.NavigateToAddress();
                 //h2[contains(text(),'Add Address')]
@@ -40,6 +44,7 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
 
             catch (Exception e)
             {
+                test.Fail(e.StackTrace);
                 //obj.Capture();
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Login.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
@@ -54,6 +59,7 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
         {
             try
             {
+                test = extent.CreateTest("Address Fill").Info("Address Test");
                 driver.Navigate().GoToUrl("https://demo.opencart.com/index.php?route=account/address/add");
 
                 var address = new AddNewAddress(driver);
@@ -69,7 +75,7 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
 
             catch (Exception e)
             {
-
+                test.Fail(e.StackTrace);
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Address01.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;

@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using AventStack.ExtentReports;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumNunitFramework.BaseTest;
+using SeleniumNunitFramework.Helpers;
 using SeleniumNunitFramework.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -15,12 +17,14 @@ namespace SeleniumNunitFramework.TestScripts
     [Parallelizable]
     public class CheckoutScenario : BaseClass
     {
+        public ExtentTest test = null;
         [Test,Order(1),Category("SmokeTest")]
         public void Login()
         {
 
             try
             {
+                test = extent.CreateTest("Login1").Info("Login Test");
                 var LOGIN = new Login(driver);
                 LOGIN.NavigateToMyAccount();
                 string title = driver.Title;
@@ -29,7 +33,7 @@ namespace SeleniumNunitFramework.TestScripts
             }
             catch (Exception e)
             {
-
+                test.Fail(e.StackTrace);
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Login2.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;
@@ -47,12 +51,14 @@ namespace SeleniumNunitFramework.TestScripts
         {
             try
             {
+                test = extent.CreateTest("My Account").Info("Account Test");
                 var myaccount = new MyAccount(driver);
                 myaccount.NavigateToProducts();
             }
 
             catch (Exception e)
             {
+                test.Fail(e.StackTrace);
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\MyAccount.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;
@@ -64,11 +70,13 @@ namespace SeleniumNunitFramework.TestScripts
         {
             try
             {
+                test = extent.CreateTest("Search Product").Info("Product Test");
                 var procuct = new Product(driver);
                 procuct.NavigateToAddToCart();
             }
             catch (Exception e)
             {
+                test.Fail(e.StackTrace);
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Product.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;
@@ -80,12 +88,14 @@ namespace SeleniumNunitFramework.TestScripts
         {
             try
             {
+                test = extent.CreateTest("Add to cart").Info("Add to cart Test");
                 var addtocart = new AddToCart(driver);
                 Thread.Sleep(3000);
-                addtocart.NavigatoToCheckout();
+                addtocart.NavigateToCheckout();
             }
             catch(Exception e)
             {
+                test.Fail(e.StackTrace);
                 ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Addtocart.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;
@@ -93,6 +103,31 @@ namespace SeleniumNunitFramework.TestScripts
            
         }
 
+
+        [Test, Order(5),Category("SmokeTest")]
+        public void Checkout()
+        {
+            try
+            {
+                test = extent.CreateTest("Checkout").Info("Checkout Test");
+                var checkout = new Checkout(driver);
+                checkout.OrderComplete();
+                Thread.Sleep(2000);
+                string title = driver.Title;
+
+                Assert.AreEqual("Your ordr has been placed!", title);
+               
+            }
+            catch (Exception e)
+            {
+                test.Fail(e.StackTrace);
+                //JiraGenerateIssue.CreateIssue("abc");
+                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Checkout.jpeg", ScreenshotImageFormat.Jpeg);
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
+
+        }
 
 
 

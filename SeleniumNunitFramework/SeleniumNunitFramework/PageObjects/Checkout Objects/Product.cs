@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SeleniumNunitFramework.PageObjects
@@ -25,6 +26,7 @@ namespace SeleniumNunitFramework.PageObjects
 
         public AddToCart NavigateToAddToCart()
         {
+            Thread.Sleep(2000);
             select.Click();
            
 

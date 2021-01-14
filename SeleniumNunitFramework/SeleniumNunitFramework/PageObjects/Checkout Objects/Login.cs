@@ -34,9 +34,9 @@ namespace SeleniumNunitFramework.PageObjects
 
         public MyAccount NavigateToMyAccount()
         {
-            ExcelLib.PopulateInCollection(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Credentials.xlsx");
-            email.SendKeys(ExcelLib.ReadData(1, "Username"));
-            password.SendKeys(ExcelLib.ReadData(1, "Password"));
+            //ExcelLib.PopulateInCollection(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Credentials.xlsx");
+            email.SendKeys("sibtainsyed94@gmail.com");
+            password.SendKeys("12345678");
             loginbutton.Click();
             return new MyAccount(driver);
 
@@ -44,7 +44,7 @@ namespace SeleniumNunitFramework.PageObjects
 
         public AddNewAddress NavigateToAddress()
         {
-            ExcelLib.PopulateInCollection(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Credentials.xlsx");
+            ExcelLib.PopulateInCollection(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Credentials1.xlsx");
             email.SendKeys(ExcelLib.ReadData(1, "Username"));
             password.SendKeys(ExcelLib.ReadData(1, "Password"));
             loginbutton.Click();

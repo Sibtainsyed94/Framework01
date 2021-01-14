@@ -125,7 +125,6 @@
   <ItemGroup>
     <Compile Include="BaseTest\BaseClass.cs" />
     <Compile Include="Excel File Reader\ExcelLib.cs" />
-    <Compile Include="ExtentReport.cs" />
     <Compile Include="Helpers\JiraGenerateIssue.cs" />
     <Compile Include="Helpers\Mailer.cs" />
     <Compile Include="TestScripts\AddressBook.cs" />
