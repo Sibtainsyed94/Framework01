@@ -10,25 +10,44 @@ using System.Configuration;
 using OpenQA.Selenium.Firefox;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
+using System.IO;
+using SeleniumNunitFramework.Helpers;
 
 namespace SeleniumNunitFramework.BaseTest
 {
     [TestFixture]
     public class BaseClass
     {
-        public String photoTime = DateTime.Now.ToString("MM.dd.yyyy HH.mm.ss");
+        public string timestamp {
+          get {
+            return DateTime.Now.ToString("MM.dd.yyyy HH.mm.ss");
+          }
+        }
+
+        private string extentreport_location = "";
+        
+        public string screenshot_location = "./";
+
         public ExtentTest test = null;
         public ExtentReports extent = null;
         public IWebDriver driver;
 
         [OneTimeSetUp]
-
         public void open()
         {
             extent = new ExtentReports();
-            var htmlReporter = new ExtentHtmlReporter(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\ExtentReports\" + photoTime + "Extent.html");
+            var er_location = System.Configuration.ConfigurationManager.AppSettings["ExtentReportLocation"];
+            var ss_location = System.Configuration.ConfigurationManager.AppSettings["ScreenshotLocation"];
+            if (!Directory.Exists(er_location)) {
+              Directory.CreateDirectory(er_location);
+            }
+            if (!Directory.Exists(ss_location)) {
+              Directory.CreateDirectory(ss_location);
+            }
+            screenshot_location = ss_location;
+            extentreport_location = string.Format("{0}{1}-Extent.html", er_location, timestamp);
+            var htmlReporter = new ExtentHtmlReporter(extentreport_location);
             extent.AttachReporter(htmlReporter);
-
             string execbrowser = ConfigurationManager.AppSettings["executionbrowser"].ToString();
             string url = ConfigurationManager.AppSettings["URL"].ToString();
 
@@ -40,24 +59,27 @@ namespace SeleniumNunitFramework.BaseTest
             {
                  driver = new FirefoxDriver();
             }
-
-
             //driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             //var URL = ConfigurationManager.AppSettings["URL"];
-
             driver.Url = url;
-
-
         }
 
 
         [OneTimeTearDown]
-     public void close()
-     {
+        public void close()
+        {
             extent.Flush();
-            //driver.Quit();
-
+            var attachments = new List<string> { };
+            attachments.Add(extentreport_location);
+            Directory.GetFiles(screenshot_location).ToList().ForEach(x => {
+              attachments.Add(x);
+            });
+            Mailer.SendMail(
+               timestamp+" - Test Report",
+               "Test Report contains attachment",
+               attachments
+            );
         }
 
     }
