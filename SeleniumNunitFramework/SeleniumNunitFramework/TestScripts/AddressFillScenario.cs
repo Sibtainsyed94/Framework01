@@ -27,8 +27,7 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
         [Test, Order(1), Category("AddressScenario")]
         public void Login()
         {
-            try
-            {
+            try {
                 //var LOGIN1 = new Login1(driver);
                 //   LOGIN1.NavigateToAddress();
                 test = extent.CreateTest("Login").Info("Login Test");
@@ -36,19 +35,11 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
                 LOGIN.NavigateToAddress();
                 //h2[contains(text(),'Add Address')]
                 string title = driver.Title;
-                
                 Assert.AreEqual("My Account",title);
-
-              
-
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 test.Fail(e.StackTrace);
-               
                 //obj.Capture();
-               ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime  + " Login.jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Login.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -59,27 +50,17 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
         [Test, Order(2), Category("AddressScenario")]
         public void Addressenter()
         {
-            try
-            {
+            try {
                 test = extent.CreateTest("Address Fill").Info("Address Test");
                 driver.Navigate().GoToUrl("https://demo.opencart.com/index.php?route=account/address/add");
-
                 var address = new AddNewAddress(driver);
-
                 address.AddressFields();
                 string actualsucessmessage = address.Suceess();
                 string expected = "Yur address has been successfully added";
                 Assert.IsTrue(actualsucessmessage.Equals(expected));
-
-
-
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 test.Fail(e.StackTrace);
-                
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime + " Address.Jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Address.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }

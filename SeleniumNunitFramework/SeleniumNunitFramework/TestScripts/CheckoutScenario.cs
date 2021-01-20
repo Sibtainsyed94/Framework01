@@ -34,7 +34,7 @@ namespace SeleniumNunitFramework.TestScripts
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime + " Login2.jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp+"-Login2.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -59,7 +59,7 @@ namespace SeleniumNunitFramework.TestScripts
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime + " MyAccount.jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-MyAccount.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -77,7 +77,7 @@ namespace SeleniumNunitFramework.TestScripts
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime +  " Product.jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Product.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -96,7 +96,7 @@ namespace SeleniumNunitFramework.TestScripts
             catch(Exception e)
             {
                 test.Fail(e.StackTrace);
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime +  "Addtocart.jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Addtocart.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -104,7 +104,7 @@ namespace SeleniumNunitFramework.TestScripts
         }
 
 
-        [Test, Order(5),Category("SmokeTest")]
+        [Test, Order(5), Category("SmokeTest")]
         public void Checkout()
         {
             try
@@ -122,7 +122,7 @@ namespace SeleniumNunitFramework.TestScripts
             {
                 test.Fail(e.StackTrace);
                 //JiraGenerateIssue.CreateIssue("abc");
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime + " Checkout.jpeg", ScreenshotImageFormat.Jpeg);
+                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Checkout.jpeg");
                 Console.WriteLine(e.StackTrace);
                 throw;
             }

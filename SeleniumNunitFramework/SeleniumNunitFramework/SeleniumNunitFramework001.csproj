@@ -127,6 +127,7 @@
     <Compile Include="Excel File Reader\ExcelLib.cs" />
     <Compile Include="Helpers\JiraGenerateIssue.cs" />
     <Compile Include="Helpers\Mailer.cs" />
+    <Compile Include="Helpers\Screenshot.cs" />
     <Compile Include="TestScripts\AddressFillScenario.cs" />
     <Compile Include="PageObjects\Checkout Objects\AddToCart.cs" />
     <Compile Include="PageObjects\Checkout Objects\Checkout.cs" />
