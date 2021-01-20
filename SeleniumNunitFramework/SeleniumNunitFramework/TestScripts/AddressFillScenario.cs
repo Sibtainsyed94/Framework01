@@ -20,7 +20,8 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
     public class AddressBook : BaseClass
 
     {
-        public ExtentTest test = null;
+        
+        //public ExtentTest test = null;
         //Screencapture obj =  new Screencapture();
 
         [Test, Order(1), Category("AddressScenario")]
@@ -45,8 +46,9 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
+               
                 //obj.Capture();
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Login.jpeg", ScreenshotImageFormat.Jpeg);
+               ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime  + " Login.jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;
             }
@@ -66,7 +68,7 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
 
                 address.AddressFields();
                 string actualsucessmessage = address.Suceess();
-                string expected = "Your address has been successfully added";
+                string expected = "Yur address has been successfully added";
                 Assert.IsTrue(actualsucessmessage.Equals(expected));
 
 
@@ -76,7 +78,8 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
-                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\Address01.jpeg", ScreenshotImageFormat.Jpeg);
+                
+                ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\Screenshots\" + photoTime + " Address.Jpeg", ScreenshotImageFormat.Jpeg);
                 Console.WriteLine(e.StackTrace);
                 throw;
             }

@@ -16,6 +16,8 @@ namespace SeleniumNunitFramework.BaseTest
     [TestFixture]
     public class BaseClass
     {
+        public String photoTime = DateTime.Now.ToString("MM.dd.yyyy HH.mm.ss");
+        public ExtentTest test = null;
         public ExtentReports extent = null;
         public IWebDriver driver;
 
@@ -24,7 +26,7 @@ namespace SeleniumNunitFramework.BaseTest
         public void open()
         {
             extent = new ExtentReports();
-            var htmlReporter = new ExtentHtmlReporter(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\ExtentReports\Extent.html");
+            var htmlReporter = new ExtentHtmlReporter(@"C:\Users\SIBTAIN\Source\Repos\Framework01\SeleniumNunitFramework\SeleniumNunitFramework\ExtentReports\" + photoTime + "Extent.html");
             extent.AttachReporter(htmlReporter);
 
             string execbrowser = ConfigurationManager.AppSettings["executionbrowser"].ToString();

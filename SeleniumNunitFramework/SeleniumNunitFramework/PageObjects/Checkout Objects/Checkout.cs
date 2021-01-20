@@ -68,7 +68,7 @@ namespace SeleniumNunitFramework.PageObjects
             Thread.Sleep(3000);
             deliverymethod.Click();
             IJavaScriptExecutor js1 = driver as IJavaScriptExecutor;
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(4000);
             js.ExecuteScript("window.scrollBy(0,200)");
             checkbox.Click();
             Thread.Sleep(3000);
