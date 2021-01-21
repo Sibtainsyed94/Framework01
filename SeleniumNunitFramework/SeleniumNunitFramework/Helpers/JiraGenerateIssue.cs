@@ -25,13 +25,13 @@ namespace SeleniumNunitFramework.Helpers
       issue.Type = "Bug";
       issue.Summary = summary;
       issue.Reporter = reporter_id;
+      issue.SaveChanges();
       if(attachments != null && attachments.Count > 0) {
         attachments.ForEach(x => {
           var f = File.ReadAllBytes(x);
           issue.AddAttachment("Evidence", f);
         });
       }
-      issue.SaveChanges();
     }
   }
 }
