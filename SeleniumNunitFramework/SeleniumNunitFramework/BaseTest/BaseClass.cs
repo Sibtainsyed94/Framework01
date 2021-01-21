@@ -36,8 +36,15 @@ namespace SeleniumNunitFramework.BaseTest
         public void open()
         {
             extent = new ExtentReports();
-            var er_location = System.Configuration.ConfigurationManager.AppSettings["ExtentReportLocation"];
-            var ss_location = System.Configuration.ConfigurationManager.AppSettings["ScreenshotLocation"];
+            var er_location = ConfigurationManager.AppSettings["ExtentReportLocation"];
+            var ss_location = ConfigurationManager.AppSettings["ScreenshotLocation"];
+            var x = Directory.GetCurrentDirectory().Replace('\\', '/');
+            if (ss_location.StartsWith("./")) {
+              ss_location = ss_location.Replace("./", x+"/");
+            }
+            if (er_location.StartsWith("./")) {
+              er_location = er_location.Replace("./", x+"/"); ;
+            }
             if (!Directory.Exists(er_location)) {
               Directory.CreateDirectory(er_location);
             }
