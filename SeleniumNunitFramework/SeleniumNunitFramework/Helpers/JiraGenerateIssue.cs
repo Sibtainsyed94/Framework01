@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace SeleniumNunitFramework.Helpers
 {
   public class JiraGenerateIssue {
-    public  static void CreateIssue(
+    public static void CreateIssue(
       string summary,
       List<string> attachments = null
     ) {
@@ -17,11 +17,14 @@ namespace SeleniumNunitFramework.Helpers
       var username = System.Configuration.ConfigurationManager.AppSettings["JiraUsername"];
       var password = System.Configuration.ConfigurationManager.AppSettings["JiraPassword"];
       var project = System.Configuration.ConfigurationManager.AppSettings["JiraProject"];
-      var jira = Jira.CreateRestClient(host, username, password);
+      var reporter_id = System.Configuration.ConfigurationManager.AppSettings["JiraReporterId"];
+      var settings = new JiraRestClientSettings();
+      settings.EnableUserPrivacyMode = true;
+      var jira = Jira.CreateRestClient(host, username, password, settings);
       var issue = jira.CreateIssue(project);
       issue.Type = "Bug";
       issue.Summary = summary;
-      issue.Reporter = "Test Script";
+      issue.Reporter = reporter_id;
       if(attachments != null && attachments.Count > 0) {
         attachments.ForEach(x => {
           var f = File.ReadAllBytes(x);
