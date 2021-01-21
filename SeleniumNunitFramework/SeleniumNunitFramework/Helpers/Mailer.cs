@@ -32,7 +32,8 @@ namespace SeleniumNunitFramework.Helpers
     ) {
       var client = generateMailer();
       MailMessage message = new MailMessage {
-        Subject = subject
+        Subject = subject,
+        From = new MailAddress("fa20-sta@localhost")
       };
       var receptients = System.Configuration.ConfigurationManager.AppSettings["MailReceptients"]
         .Split(';').ToList();
@@ -41,15 +42,16 @@ namespace SeleniumNunitFramework.Helpers
       });
       attachments.ForEach(x => {
         var f = File.OpenRead(x);
-        var at = new Attachment(f, MediaTypeNames.Application.Octet);
-        message.Attachments.Add(at);
+        if (x.EndsWith(".html")) { 
+          var at = new Attachment(f, MediaTypeNames.Text.Html);
+          message.Attachments.Add(at);
+        } else if(x.EndsWith(".jpeg")) {
+          var at = new Attachment(f, MediaTypeNames.Image.Jpeg);
+          message.Attachments.Add(at);
+        }
       });
       message.Body = body;
-      try {
-        client.Send(message);
-      } catch {
-        Console.WriteLine("Failed to send email");
-      }
+      client.Send(message);
     }
   }
 }
