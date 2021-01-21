@@ -39,16 +39,13 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
             } catch (Exception e) {
                 test.Fail(e.StackTrace);
                 //obj.Capture();
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Login.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Login.jpeg");
+                JiraGenerateIssue.CreateIssue("Login Failed", new List<string> { loc });
             }
-
-            
         }
 
         [Test, Order(2), Category("AddressScenario")]
-        public void Addressenter()
+        public void AddressEnter()
         {
             try {
                 test = extent.CreateTest("Address Fill").Info("Address Test");
@@ -60,9 +57,8 @@ namespace SeleniumNunitFramework.PageObjects.Address_Objects
                 Assert.IsTrue(actualsucessmessage.Equals(expected));
             } catch (Exception e) {
                 test.Fail(e.StackTrace);
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Address.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Address.jpeg");
+                JiraGenerateIssue.CreateIssue("AddressEnter Failed", new List<string> { loc });
             }
 
         }

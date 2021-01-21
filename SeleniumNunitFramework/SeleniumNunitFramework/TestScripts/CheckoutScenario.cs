@@ -22,28 +22,24 @@ namespace SeleniumNunitFramework.TestScripts
         public void Login()
         {
 
-            try
-            {
+            try {
                 test = extent.CreateTest("Login1").Info("Login Test");
                 var LOGIN = new Login(driver);
                 LOGIN.NavigateToMyAccount();
                 string title = driver.Title;
 
                 Assert.AreEqual("My Account", title);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 test.Fail(e.StackTrace);
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp+"-Login2.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp+"-Login2.jpeg");
+                JiraGenerateIssue.CreateIssue("Login", new List<string> { loc });
             }
 
-            //var product = Myaccount.NavigateToProducts();
+          //var product = Myaccount.NavigateToProducts();
 
-            //var addtocart = product.NavigateToAddToCart();
-            // Thread.Sleep(3000);
-            // addtocart.NavigatoToCheckout();
+          //var addtocart = product.NavigateToAddToCart();
+          // Thread.Sleep(3000);
+          // addtocart.NavigatoToCheckout();
         }
 
         [Test,Order(2),Category("SmokeTest")]
@@ -54,14 +50,11 @@ namespace SeleniumNunitFramework.TestScripts
                 test = extent.CreateTest("My Account").Info("Account Test");
                 var myaccount = new MyAccount(driver);
                 myaccount.NavigateToProducts();
-            }
-
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 test.Fail(e.StackTrace);
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-MyAccount.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-MyAccount.jpeg");
+                JiraGenerateIssue.CreateIssue("MyAccount Failed", new List<string> { loc });
+
             }
         }
 
@@ -77,14 +70,14 @@ namespace SeleniumNunitFramework.TestScripts
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Product.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Product.jpeg");
+                JiraGenerateIssue.CreateIssue("Products Failed", new List<string> { loc });
+
             }
         }
 
         [Test, Order(4),Category("SmokeTest")]
-        public void Addtocart()
+        public void AddToCart()
         {
             try
             {
@@ -96,9 +89,8 @@ namespace SeleniumNunitFramework.TestScripts
             catch(Exception e)
             {
                 test.Fail(e.StackTrace);
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Addtocart.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Addtocart.jpeg");
+                JiraGenerateIssue.CreateIssue("AddToCart Failed", new List<string> { loc });
             }
            
         }
@@ -121,10 +113,8 @@ namespace SeleniumNunitFramework.TestScripts
             catch (Exception e)
             {
                 test.Fail(e.StackTrace);
-                //JiraGenerateIssue.CreateIssue("abc");
-                Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Checkout.jpeg");
-                Console.WriteLine(e.StackTrace);
-                throw;
+                var loc = Helpers.Screenshot.TakeScreenshot(ref driver, screenshot_location, timestamp + "-Checkout.jpeg");
+                JiraGenerateIssue.CreateIssue("Checkout Failed", new List<string> { loc });
             }
 
         }
